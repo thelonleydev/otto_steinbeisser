@@ -6,7 +6,12 @@
   <title>otto-steinbeisser</title>
   <!-- Local Bootstrap CSS -->
   <link href="./static/css/bootstrap.min.css" rel="stylesheet">
-  
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Include Tilt.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
   <style>
     @font-face {
       font-family: 'Dancing Script';
@@ -83,6 +88,8 @@
       justify-content: center;
       align-items: center;
       gap: 1.5rem;
+      /* Add the following to preserve rounded corners with Tilt.js */
+      overflow: hidden;
     }
     .jumbotron-content h1 {
       font-size: 3.5rem;
@@ -185,7 +192,9 @@
     <a href="./impress.html">Impressum</a>
     <button id="change-color-btn" class="color-dot"></button>
   </div>
+  <!-- Include Bootstrap JS -->
   <script src="./static/js/bootstrap.bundle.min.js"></script>
+  <!-- Your existing custom scripts -->
   <script>
     const canvas = document.querySelector('.matrix-canvas');
     const ctx = canvas.getContext('2d');
@@ -249,7 +258,7 @@
         ripple.radius += 8;
         ripple.alpha -= 0.1;
 
-        ctx.fillStyle = `${matrixColor}${Math.floor(ripple.alpha * 255).toString(16)}`;
+        ctx.fillStyle = `${matrixColor}${Math.floor(ripple.alpha * 255).toString(16).padStart(2, '0')}`;
         ctx.font = `${fontSize}px monospace`;
 
         for (let angle = 0; angle < 2 * Math.PI; angle += Math.PI / 12) {
@@ -283,6 +292,18 @@
       resizeCanvas();
       initMatrix();
     });
-  </script>  
+
+    // Initialize Tilt.js on the jumbotron-content element
+    $(document).ready(function() {
+      $('.jumbotron-content').tilt({
+        maxTilt: 20,
+        perspective: 1000,
+        scale: 1.05,
+        speed: 300,
+        glare: false, // Disable glare to prevent white glow
+        maxGlare: 0   // Set maxGlare to 0 just in case
+      });
+    });
+  </script>
 </body>
 </html>
