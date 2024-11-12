@@ -10,7 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <style>
     html, body {
-        overflow: hidden;
+      overflow: hidden;
+      margin: 0;
+      height: 100%;
     }
     .navbar-custom {
       background-color: #0d1117;
@@ -58,26 +60,31 @@
       background: black;
     }
     .jumbotron-content {
-        position: relative;
-        z-index: 1;
-        font-family: 'Dancing Script', cursive;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(2px);
-        padding: 2rem;
-        border-radius: 25px;
-        box-shadow: 
-            0 10px 20px rgba(0, 0, 0, 0.6),
-            0 0 15px rgba(88, 166, 255, 0.6),
-            0 0 30px rgba(88, 166, 255, 0.6);
+      position: relative;
+      z-index: 1;
+      font-family: 'Dancing Script', cursive;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      padding: 2rem;
+      border-radius: 25px;
+      box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.6),
+        0 0 15px rgba(88, 166, 255, 0.6),
+        0 0 30px rgba(88, 166, 255, 0.6);
+      display: flex;
+      flex-direction: column; /* Stack elements vertically */
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem; /* Add space between elements */
     }
     .jumbotron-content h1 {
       font-size: 3.5rem;
       font-weight: bold;
-      margin-bottom: 1rem;
+      margin-bottom: 0; /* Remove additional spacing */
     }
     .jumbotron-content p {
       font-size: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 0; /* Remove additional spacing */
     }
     .btn-jumbotron {
       padding: 0.75rem 2rem;
@@ -103,7 +110,7 @@
       text-align: center;
       padding: 0.5rem;
       font-size: 1rem;
-      font-family: Arial, sans-serif; /* Font auf Arial gesetzt */
+      font-family: Arial, sans-serif;
       z-index: 2;
     }
     .footer-banner a {
@@ -113,6 +120,13 @@
     }
     .footer-banner a:hover {
       color: #1f6feb;
+    }
+    @media (max-width: 960px) {
+      .jumbotron-content {
+        background: none;
+        box-shadow: none;
+        backdrop-filter: none; /* Removes blur */
+      }
     }
   </style>
 </head>
@@ -129,7 +143,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Über mich</a>
+            <a class="nav-link" href="./aboutme.html">Über mich</a>
           </li>
           <li class="nav-item">
             <a class="btn btn-custom nav-link px-3 py-2" href="#">Projekte</a>
