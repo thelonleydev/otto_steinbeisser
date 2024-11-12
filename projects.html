@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projekte - Otto Steinbeisser</title>
+  <!-- Local Bootstrap CSS -->
+  <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Include jQuery -->
+  <script src="./static/js/jquery-3.6.0.min.js"></script>
+
+  <style>
+    @font-face {
+      font-family: 'Dancing Script';
+      src: url('./static/font/DancingScript-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar-custom {
+      background-color: #0d1117;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .navbar-brand {
+      font-family: 'Dancing Script', cursive;
+      color: #ffffff !important;
+      font-size: 1.8rem;
+    }
+    .nav-link {
+      font-family: 'Dancing Script', cursive;
+      color: #ffffff !important;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #58a6ff !important;
+    }
+    .projects-container {
+      flex: 1;
+      padding: 2rem;
+      background-color: #0d1117;
+      color: white;
+    }
+    .project {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+    }
+    .project-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+    }
+    .footer-banner {
+      background-color: #58a6ff;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .footer-banner a {
+      color: #ffffff;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .footer-banner a:hover {
+      color: #1f6feb;
+    }
+    .search-box {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+    }
+    .search-box input {
+      width: calc(100% - 3rem);
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Otto Steinbeisser</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./aboutme.html">Über mich</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-custom nav-link px-3 py-2" href="#">Projekte</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="projects-container">
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Projekte durchsuchen...">
+    </div>
+    <div id="projects-list">
+      <div class="project" data-title="Project Alpha">
+        <h2 class="project-title">Project Alpha</h2>
+        <p>Ein spannendes Webentwicklungsprojekt mit modernen Tools.</p>
+      </div>
+      <div class="project" data-title="Project Beta">
+        <h2 class="project-title">Project Beta</h2>
+        <p>Eine mobile App, die das Leben erleichtert.</p>
+      </div>
+      <div class="project" data-title="Project Gamma">
+        <h2 class="project-title">Project Gamma</h2>
+        <p>Ein Machine Learning Projekt mit Python.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-banner">
+    <a href="./impress.html">Impressum</a>
+  </div>
+
+  <!-- Include Bootstrap JS -->
+  <script src="./static/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Search functionality
+    $('#search-input').on('keyup', function() {
+      const searchText = $(this).val().toLowerCase();
+      $('.project').each(function() {
+        const projectTitle = $(this).data('title').toLowerCase();
+        $(this).toggle(projectTitle.includes(searchText));
+      });
+    });
+  </script>
+</body>
+</html>
