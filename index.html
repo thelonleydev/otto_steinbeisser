@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matrix Jumbotron</title>
+  <title>otto-steinbeisser</title>
   <!-- Local Bootstrap CSS -->
   <link href="./static/css/bootstrap.min.css" rel="stylesheet">
   
@@ -170,46 +170,85 @@
   <script>
     const canvas = document.querySelector('.matrix-canvas');
     const ctx = canvas.getContext('2d');
-
+  
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = document.querySelector('.jumbotron-custom').offsetHeight;
     }
-
+  
     resizeCanvas();
-
-    const letters = '01';
+  
     const fontSize = 16;
     let columns;
     let drops;
-
+    let ripples = []; // Array to store ripple effects
+    let currentLetter = '0'; // Start with one type of letter
+  
     function initMatrix() {
       columns = canvas.width / fontSize;
       drops = Array(Math.floor(columns)).fill(0);
     }
-
+  
     function drawMatrix() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // Faster fade-out for background
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#58a6ff';
-      ctx.font = `${fontSize}px monospace`;
+  
+      // Draw the standard matrix rain effect
       for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillStyle = '#58a6ff';
+        ctx.font = `${fontSize}px monospace`;
+  
+        const text = currentLetter; // Display only the current letter type
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+  
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
       }
+  
+      // Handle ripples
+      ripples = ripples.filter(ripple => ripple.alpha > 0); // Remove ripples with no visibility
+  
+      ripples.forEach(ripple => {
+        ripple.radius += 8; // Faster expansion
+        ripple.alpha -= 0.1; // Faster disappearance
+  
+        ctx.fillStyle = `rgba(88, 166, 255, ${ripple.alpha})`;
+        ctx.font = `${fontSize}px monospace`;
+  
+        // Draw the ripple effect
+        for (let angle = 0; angle < 2 * Math.PI; angle += Math.PI / 12) {
+          const x = ripple.x + Math.cos(angle) * ripple.radius;
+          const y = ripple.y + Math.sin(angle) * ripple.radius;
+  
+          const col = Math.floor(x / fontSize);
+          const row = Math.floor(y / fontSize);
+  
+          if (col >= 0 && col < columns && row >= 0 && y < canvas.height) {
+            ctx.fillText(currentLetter, col * fontSize, row * fontSize);
+          }
+        }
+      });
     }
-
+  
+    function createRipple(x, y) {
+      ripples.push({ x, y, radius: 0, alpha: 1 });
+      currentLetter = currentLetter === '0' ? '1' : '0'; // Switch between 0 and 1
+    }
+  
+    canvas.addEventListener('mousemove', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      createRipple(event.clientX - rect.left, event.clientY - rect.top);
+    });
+  
     initMatrix();
     setInterval(drawMatrix, 50);
-
+  
     window.addEventListener('resize', () => {
       resizeCanvas();
       initMatrix();
     });
-  </script>
+  </script>  
 </body>
 </html>
