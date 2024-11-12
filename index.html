@@ -10,9 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <style>
     html, body {
-      overflow: hidden;
       margin: 0;
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .navbar-custom {
       background-color: #0d1117;
@@ -43,7 +44,7 @@
       position: relative;
       overflow: hidden;
       color: white;
-      height: 100vh;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -72,19 +73,19 @@
         0 0 15px rgba(88, 166, 255, 0.6),
         0 0 30px rgba(88, 166, 255, 0.6);
       display: flex;
-      flex-direction: column; /* Stack elements vertically */
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 1.5rem; /* Add space between elements */
+      gap: 1.5rem;
     }
     .jumbotron-content h1 {
       font-size: 3.5rem;
       font-weight: bold;
-      margin-bottom: 0; /* Remove additional spacing */
+      margin-bottom: 0;
     }
     .jumbotron-content p {
       font-size: 1.5rem;
-      margin-bottom: 0; /* Remove additional spacing */
+      margin-bottom: 0;
     }
     .btn-jumbotron {
       padding: 0.75rem 2rem;
@@ -101,17 +102,12 @@
       box-shadow: 0 6px 12px rgba(31, 111, 235, 0.6);
     }
     .footer-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
       background-color: #58a6ff;
       color: white;
       text-align: center;
       padding: 0.5rem;
       font-size: 1rem;
       font-family: Arial, sans-serif;
-      z-index: 2;
     }
     .footer-banner a {
       color: #ffffff;
@@ -125,7 +121,7 @@
       .jumbotron-content {
         background: none;
         box-shadow: none;
-        backdrop-filter: none; /* Removes blur */
+        backdrop-filter: none;
       }
     }
   </style>
@@ -167,12 +163,23 @@
   <script>
     const canvas = document.querySelector('.matrix-canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = document.querySelector('.jumbotron-custom').offsetHeight;
+    }
+
+    resizeCanvas();
+
     const letters = '01';
     const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(0);
+    let columns;
+    let drops;
+
+    function initMatrix() {
+      columns = canvas.width / fontSize;
+      drops = Array(Math.floor(columns)).fill(0);
+    }
 
     function drawMatrix() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -188,10 +195,13 @@
         drops[i]++;
       }
     }
+
+    initMatrix();
     setInterval(drawMatrix, 50);
+
     window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      resizeCanvas();
+      initMatrix();
     });
   </script>
 </body>
