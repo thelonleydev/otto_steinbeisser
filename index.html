@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Jumbotron</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* Navbar */
+    .navbar-custom {
+      background-color: #0d1117;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .navbar-brand {
+      font-family: 'Dancing Script', cursive;
+      color: #ffffff !important;
+      font-size: 1.8rem;
+    }
+    .nav-link {
+      font-family: 'Dancing Script', cursive;
+      color: #ffffff !important;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #58a6ff !important;
+    }
+    .btn-custom {
+      background-color: #58a6ff;
+      color: #ffffff;
+      border-radius: 25px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+    }
+
+    /* Matrix Jumbotron */
+    .jumbotron-custom {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .matrix-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: black;
+    }
+    .jumbotron-content {
+      position: relative;
+      z-index: 1;
+      font-family: 'Dancing Script', cursive;
+    }
+    .jumbotron-content h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .jumbotron-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .btn-jumbotron {
+      padding: 0.75rem 2rem;
+      background-color: #58a6ff;
+      color: #ffffff;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 25px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 6px rgba(88, 166, 255, 0.4);
+    }
+    .btn-jumbotron:hover {
+      background-color: #1f6feb;
+      box-shadow: 0 6px 12px rgba(31, 111, 235, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Otto Steinbeißer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Über mich</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-custom nav-link px-3 py-2" href="#">Projekte</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Matrix Jumbotron -->
+  <div class="jumbotron-custom">
+    <canvas class="matrix-canvas"></canvas>
+    <div class="jumbotron-content">
+      <h1>Willkommen auf otto-steinbeisser.de</h1>
+      <p>Tauche in eine Welt der unendlichen Programmiermöglichkeiten ein!</p>
+      <a href="#" class="btn btn-jumbotron">Jetzt starten</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Matrix Falling Code Effect -->
+  <script>
+    const canvas = document.querySelector('.matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = '01';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(0);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#58a6ff';
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
