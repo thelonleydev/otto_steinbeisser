@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Grundlagen</title>
+    <!-- Lokales Bootstrap CSS -->
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Eigene Schriftart -->
+    <style>
+        @font-face {
+        font-family: 'Dancing Script';
+        src: url('./static/font/DancingScript-VariableFont_wght.ttf') format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        }
+
+        /* Allgemeine Stile */
+        body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .navbar-custom {
+        background-color: #0d1117; /* Dunkler Hintergrund */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+        font-family: 'Dancing Script', cursive;
+        color: #ffffff !important;
+        font-size: 1.8rem;
+        }
+
+        .nav-link {
+        font-family: 'Dancing Script', cursive;
+        color: #ffffff !important;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+        color: #58a6ff !important; /* Hellere Blautöne beim Hover */
+        }
+
+        /* Suchleiste in der Navbar */
+        .navbar-search {
+        width: 200px;
+        }
+
+        .navbar-search input {
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        border: none;
+        border-radius: 25px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        }
+
+        .navbar-search input::placeholder {
+        color: #ccc;
+        }
+
+        /* Hamburger Menu Icon */
+        .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/&gt;%3C/svg%3E");
+        }
+
+        /* Hauptinhalt */
+        .container {
+        max-width: 1200px;
+        margin: 80px auto 40px auto; /* Abstand für feste Navbar */
+        padding: 0 20px;
+        flex: 1;
+        }
+
+        section {
+        margin-bottom: 40px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+        border-bottom: 2px solid #4682B4; /* Hauptfarbe für Abschnittsüberschriften */
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        color: #4682B4;
+        font-family: 'Dancing Script', cursive; /* Schriftart für Überschriften */
+        }
+
+        h1, h2, h3 {
+        margin-top: 0;
+        }
+
+        ul {
+        list-style: none;
+        padding-left: 0;
+        }
+
+        /* Entfernt ::before für Navigation */
+        .container ul li::before {
+        content: "•";
+        color: #4682B4; /* Hauptfarbe für Listenpunkte */
+        display: inline-block; 
+        width: 1em;
+        margin-left: -1em;
+        }
+
+        pre {
+        background-color: #2d2d2d;
+        color: #ccc;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: 'Courier New', Courier, monospace;
+        margin-bottom: 20px;
+        }
+
+        code {
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Footer Banner */
+        .footer-banner {
+        background-color: #58a6ff; /* Anpassung an ursprüngliche Farbe */
+        color: white;
+        text-align: center;
+        padding: 0.5rem;
+        font-size: 1rem;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .footer-banner a {
+        color: #ffffff;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+        }
+
+        .footer-banner a:hover {
+        color: #1f6feb;
+        }
+
+        /* Projekte Container */
+        .projects-container {
+        flex: 1;
+        padding: 2rem;
+        background-color: #0d1117;
+        color: white;
+        }
+
+        .project {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+        }
+
+        .project-title {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+        .navbar-collapse {
+            background-color: #0d1117; /* Dunkler Hintergrund für mobile Ansicht */
+        }
+
+        .navbar-links {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .navbar-links a {
+            padding: 1rem;
+            border-top: 1px solid #58a6ff; /* Hellere Blautöne für Trennung */
+        }
+
+        .navbar-search {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        }
+    </style>
+    </head>
+    <body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">Otto Steinbeisser</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./aboutme.html">Über mich</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-custom nav-link px-3 py-2" href="./projects.html">Projekte</a>
+            </li>
+            </ul>
+            <!-- Suchleiste in der Navbar -->
+            <form class="d-flex ms-3 navbar-search">
+            <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search" id="search-input">
+            </form>
+        </div>
+        </div>
+    </nav>
+
+    <!-- Hauptinhalt -->
+    <div class="container">
+        <!-- Einleitung -->
+        <section id="einleitung">
+            <h1 class="section-header">Einleitung</h1>
+            <p>
+                HTML (HyperText Markup Language) ist die Standard-Auszeichnungssprache für die Erstellung von Webseiten.
+                Es ermöglicht die Strukturierung von Inhalten wie Text, Bildern, Links und anderen Elementen auf einer Seite.
+                In diesem Leitfaden werden die grundlegenden Konzepte und Elemente von HTML erklärt.
+            </p>
+        </section>
+
+        <!-- Grundlagen -->
+        <section id="grundlagen">
+            <h2 class="section-header">Grundlagen von HTML</h2>
+            <ul>
+                <li><strong>Elemente:</strong> Bausteine von HTML, bestehen aus Tags.</li>
+                <li><strong>Tags:</strong> Markieren den Beginn und das Ende eines Elements, z.B. <code>&lt;p&gt;</code> für Absätze.</li>
+                <li><strong>Attribute:</strong> Zusätzliche Informationen zu einem Element, z.B. <code>href</code> bei <code>&lt;a&gt;</code>-Tags.</li>
+                <li><strong>Verschachtelung:</strong> Elemente können innerhalb anderer Elemente platziert werden.</li>
+            </ul>
+        </section>
+
+        <!-- Struktur eines HTML-Dokuments -->
+        <section id="struktur">
+            <h2 class="section-header">Struktur eines HTML-Dokuments</h2>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Beispielseite&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Willkommen!&lt;/h1&gt;
+    &lt;p&gt;Dies ist ein einfacher HTML-Dokument.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+            <p>
+                <strong>&lt;!DOCTYPE html&gt;:</strong> Definiert die Dokumenttyp-Deklaration.<br>
+                <strong>&lt;html&gt;:</strong> Das Wurzelelement des HTML-Dokuments.<br>
+                <strong>&lt;head&gt;:</strong> Enthält Metadaten, Titel und Links zu Ressourcen.<br>
+                <strong>&lt;body&gt;:</strong> Enthält den sichtbaren Inhalt der Webseite.
+            </p>
+        </section>
+
+        <!-- Wichtige HTML-Elemente -->
+        <section id="elemente">
+            <h2 class="section-header">Wichtige HTML-Elemente</h2>
+            <div>
+                <h3>Textformatierung</h3>
+                <ul>
+                    <li><code>&lt;h1&gt; bis &lt;h6&gt;</code>: Überschriften.</li>
+                    <li><code>&lt;p&gt;</code>: Absatz.</li>
+                    <li><code>&lt;strong&gt;</code>: Fettdruck.</li>
+                    <li><code>&lt;em&gt;</code>: Kursivdruck.</li>
+                    <li><code>&lt;br&gt;</code>: Zeilenumbruch.</li>
+                    <li><code>&lt;span&gt;</code>: Inline-Container für Text.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Links und Bilder</h3>
+                <ul>
+                    <li><code>&lt;a href="URL"&gt;</code>: Hyperlink.</li>
+                    <li><code>&lt;img src="Pfad" alt="Beschreibung"&gt;</code>: Bild.</li>
+                    <li><code>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</code>: Listen.</li>
+                    <li><code>&lt;figure&gt; &lt;figcaption&gt;</code>: Bilder mit Beschriftung.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Semantische HTML-Elemente -->
+        <section id="semantik">
+            <h2 class="section-header">Semantische HTML-Elemente</h2>
+            <p>
+                Semantische Elemente geben dem Inhalt eine Bedeutung, die über die reine Darstellung hinausgeht. Sie verbessern die
+                Lesbarkeit des Codes und unterstützen Suchmaschinen sowie Screenreader.
+            </p>
+            <ul>
+                <li><code>&lt;header&gt;</code>: Kopfbereich einer Seite oder eines Abschnitts.</li>
+                <li><code>&lt;nav&gt;</code>: Navigationsbereich.</li>
+                <li><code>&lt;main&gt;</code>: Hauptinhalt der Seite.</li>
+                <li><code>&lt;article&gt;</code>: Selbstständiger Inhalt, z.B. Blog-Post.</li>
+                <li><code>&lt;section&gt;</code>: Thematischer Abschnitt.</li>
+                <li><code>&lt;aside&gt;</code>: Nebeninhalt, z.B. Sidebar.</li>
+                <li><code>&lt;footer&gt;</code>: Fußbereich einer Seite oder eines Abschnitts.</li>
+                <li><code>&lt;figure&gt; &lt;figcaption&gt;</code>: Bilder oder Diagramme mit Beschriftung.</li>
+                <li><code>&lt;details&gt; &lt;summary&gt;</code>: Aufklappbare Details.</li>
+            </ul>
+        </section>
+
+        <!-- Multimedia -->
+        <section id="multimedia">
+            <h2 class="section-header">Multimedia</h2>
+            <p>
+                HTML ermöglicht das Einbinden von Multimedia-Inhalten wie Videos und Audiodateien.
+            </p>
+            <h3>Video</h3>
+            <pre>
+&lt;video controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.ogg" type="video/ogg"&gt;
+    Ihr Browser unterstützt das Video-Tag nicht.
+&lt;/video&gt;
+            </pre>
+            <p>
+                <strong>Attribute:</strong>
+                <ul>
+                    <li><code>controls</code>: Zeigt die Standard-Steuerelemente des Browsers an.</li>
+                    <li><code>&lt;source&gt;</code>: Definiert verschiedene Videoquellen für unterschiedliche Formate.</li>
+                </ul>
+            </p>
+            <h3>Audio</h3>
+            <pre>
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Ihr Browser unterstützt das Audio-Tag nicht.
+&lt;/audio&gt;
+            </pre>
+            <p>
+                <strong>Attribute:</strong>
+                <ul>
+                    <li><code>controls</code>: Zeigt die Standard-Steuerelemente des Browsers an.</li>
+                    <li><code>&lt;source&gt;</code>: Definiert verschiedene Audioquellen für unterschiedliche Formate.</li>
+                </ul>
+            </p>
+            <h3>Einbettung von YouTube-Videos</h3>
+            <pre>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen&gt;
+&lt;/iframe&gt;
+            </pre>
+        </section>
+
+        <!-- Tabellen -->
+        <section id="tabellen">
+            <h2 class="section-header">Tabellen</h2>
+            <p>
+                Tabellen werden verwendet, um tabellarische Daten darzustellen.
+            </p>
+            <pre>
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Header 1&lt;/th&gt;
+            &lt;th&gt;Header 2&lt;/th&gt;
+            &lt;th&gt;Header 3&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Daten 1&lt;/td&gt;
+            &lt;td&gt;Daten 2&lt;/td&gt;
+            &lt;td&gt;Daten 3&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Daten 4&lt;/td&gt;
+            &lt;td&gt;Daten 5&lt;/td&gt;
+            &lt;td&gt;Daten 6&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+            </pre>
+            <p>
+                <strong>Elemente:</strong>
+                <ul>
+                    <li><code>&lt;table&gt;</code>: Tabellencontainer.</li>
+                    <li><code>&lt;thead&gt;</code>: Tabellenkopf.</li>
+                    <li><code>&lt;tbody&gt;</code>: Tabellenkörper.</li>
+                    <li><code>&lt;tr&gt;</code>: Tabellenzeile.</li>
+                    <li><code>&lt;th&gt;</code>: Tabellenkopfzelle.</li>
+                    <li><code>&lt;td&gt;</code>: Tabellendatenzelle.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Layout-Elemente -->
+        <section id="layout">
+            <h2 class="section-header">Layout-Elemente</h2>
+            <p>
+                HTML5 bietet verschiedene semantische Elemente, die zur Strukturierung des Layouts verwendet werden können.
+            </p>
+            <ul>
+                <li><code>&lt;header&gt;</code>: Kopfbereich einer Seite oder eines Abschnitts.</li>
+                <li><code>&lt;nav&gt;</code>: Navigationsbereich.</li>
+                <li><code>&lt;main&gt;</code>: Hauptinhalt der Seite.</li>
+                <li><code>&lt;section&gt;</code>: Thematischer Abschnitt.</li>
+                <li><code>&lt;article&gt;</code>: Selbstständiger Inhalt, z.B. Blog-Post.</li>
+                <li><code>&lt;aside&gt;</code>: Nebeninhalt, z.B. Sidebar.</li>
+                <li><code>&lt;footer&gt;</code>: Fußbereich einer Seite oder eines Abschnitts.</li>
+            </ul>
+            <p>
+                Diese Elemente verbessern die Lesbarkeit des HTML-Codes und unterstützen Suchmaschinen und Screenreader bei der Interpretation der Seite.
+            </p>
+        </section>
+
+        <!-- Formulare -->
+        <section id="formulare">
+            <h2 class="section-header">Formulare</h2>
+            <p>
+                Formulare sind essenziell für die Benutzerinteraktion auf Webseiten. Sie ermöglichen das Sammeln von Daten von Benutzern.
+            </p>
+            <pre>
+&lt;form action="/submit" method="post"&gt;
+    &lt;div&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" required&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="email"&gt;E-Mail:&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label for="message"&gt;Nachricht:&lt;/label&gt;
+        &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    &lt;button type="submit"&gt;Absenden&lt;/button&gt;
+&lt;/form&gt;
+            </pre>
+            <p>
+                <strong>Attribute:</strong>
+                <ul>
+                    <li><code>action</code>: URL, an die das Formular gesendet wird.</li>
+                    <li><code>method</code>: HTTP-Methode, z.B. <code>GET</code> oder <code>POST</code>.</li>
+                    <li><code>required</code>: Macht das Feld obligatorisch.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- CSS & JavaScript Integration -->
+        <section id="integration">
+            <h2 class="section-header">CSS & JavaScript Integration</h2>
+            <p>
+                HTML kann mit CSS und JavaScript integriert werden, um das Aussehen und die Funktionalität der Webseite zu verbessern.
+            </p>
+            <h3>CSS Integration</h3>
+            <pre>
+&lt;!-- Externe CSS-Datei --&gt;
+&lt;link rel="stylesheet" href="styles.css"&gt;
+
+&lt;!-- Interne CSS --&gt;
+&lt;style&gt;
+    body {
+        background-color: #f0f0f0;
+    }
+&lt;/style&gt;
+            </pre>
+            <p>
+                <strong>Methoden:</strong>
+                <ul>
+                    <li><code>&lt;link&gt;</code>: Bindet externe CSS-Dateien ein.</li>
+                    <li><code>&lt;style&gt;</code>: Definiert interne CSS-Regeln.</li>
+                </ul>
+            </p>
+            <h3>JavaScript Integration</h3>
+            <pre>
+&lt;!-- Externe JavaScript-Datei --&gt;
+&lt;script src="script.js"&gt;&lt;/script&gt;
+
+&lt;!-- Interner JavaScript --&gt;
+&lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Seite geladen');
+    });
+&lt;/script&gt;
+            </pre>
+            <p>
+                <strong>Methoden:</strong>
+                <ul>
+                    <li><code>&lt;script&gt;</code>: Bindet externe oder interne JavaScript-Dateien ein.</li>
+                    <li>Platzierung am Ende des <code>&lt;body&gt;</code> oder im <code>&lt;head&gt;</code> mit <code>defer</code> Attribut.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Responsive Images -->
+        <section id="responsive-images">
+            <h2 class="section-header">Responsive Images</h2>
+            <p>
+                Responsive Images passen sich automatisch an verschiedene Bildschirmgrößen und Auflösungen an. Dies wird durch die Verwendung von `<picture>` und `srcset` erreicht.
+            </p>
+            <pre>
+&lt;picture&gt;
+    &lt;source media="(min-width: 800px)" srcset="large-image.jpg"&gt;
+    &lt;source media="(min-width: 400px)" srcset="medium-image.jpg"&gt;
+    &lt;img src="small-image.jpg" alt="Beschreibung des Bildes"&gt;
+&lt;/picture&gt;
+            </pre>
+            <p>
+                <strong>Elemente:</strong>
+                <ul>
+                    <li><code>&lt;picture&gt;</code>: Container für verschiedene Bildquellen.</li>
+                    <li><code>&lt;source&gt;</code>: Definiert Bedingungen für die Bildauswahl.</li>
+                    <li><code>&lt;img&gt;</code>: Fallback-Bild für Browser, die `<picture>` nicht unterstützen.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- HTML5 Canvas API -->
+        <section id="canvas">
+            <h2 class="section-header">HTML5 Canvas API</h2>
+            <p>
+                Die Canvas API ermöglicht das Zeichnen von Grafiken und Animationen direkt im Browser mittels JavaScript.
+            </p>
+            <pre>
+&lt;canvas id="myCanvas" width="200" height="100"&gt;
+    Ihr Browser unterstützt das Canvas-Element nicht.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#4682B4';
+    ctx.fillRect(10, 10, 150, 75);
+&lt;/script&gt;
+            </pre>
+            <p>
+                <strong>Elemente:</strong>
+                <ul>
+                    <li><code>&lt;canvas&gt;</code>: Container für das Zeichnen.</li>
+                    <li><code>getContext('2d')</code>: Erlaubt das Zeichnen in 2D.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Custom Data Attributes -->
+        <section id="data-attributes">
+            <h2 class="section-header">Custom Data Attributes</h2>
+            <p>
+                Custom Data Attributes ermöglichen das Hinzufügen zusätzlicher Informationen zu HTML-Elementen, die mit JavaScript verwendet werden können.
+            </p>
+            <pre>
+&lt;div data-user-id="12345" data-role="admin"&gt;
+    Benutzerinformationen
+&lt;/div&gt;
+
+&lt;script&gt;
+    const div = document.querySelector('div');
+    const userId = div.dataset.userId;
+    const role = div.dataset.role;
+    console.log(userId, role);
+&lt;/script&gt;
+            </pre>
+            <p>
+                <strong>Syntax:</strong>
+                <ul>
+                    <li>Attribute beginnen mit `data-` gefolgt vom Namen, z.B. `data-user-id`.</li>
+                    <li>In JavaScript können diese Attribute über `dataset` abgerufen werden.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Web Fonts und Typografie -->
+        <section id="web-fonts">
+            <h2 class="section-header">Web Fonts und Typografie</h2>
+            <p>
+                Web Fonts ermöglichen die Verwendung von benutzerdefinierten Schriftarten auf Webseiten. Dies verbessert die Typografie und das visuelle Erscheinungsbild.
+            </p>
+            <pre>
+&lt;head&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet"&gt;
+    &lt;style&gt;
+        body {
+            font-family: 'Dancing Script', cursive;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+            </pre>
+            <p>
+                <strong>Elemente:</strong>
+                <ul>
+                    <li><code>&lt;link&gt;</code>: Bindet externe Schriftarten ein.</li>
+                    <li><code>font-family</code>: Definiert die Schriftart im CSS.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Meta Tags und Structured Data -->
+        <section id="meta-tags">
+            <h2 class="section-header">Meta Tags und Structured Data</h2>
+            <p>
+                Meta Tags liefern Metadaten über die Webseite, die von Suchmaschinen und sozialen Medien genutzt werden. Structured Data hilft Suchmaschinen, den Inhalt der Seite besser zu verstehen.
+            </p>
+            <pre>
+&lt;head&gt;
+    &lt;meta name="description" content="Dies ist eine Beispielseite, die die Grundlagen von HTML erklärt."&gt;
+    &lt;meta property="og:title" content="HTML Grundlagen"&gt;
+    &lt;meta property="og:description" content="Ein umfassender Leitfaden zu den HTML-Grundlagen."&gt;
+    &lt;meta property="og:image" content="image.jpg"&gt;
+    &lt;meta property="og:url" content="https://www.beispielseite.de"&gt;
+&lt;/head&gt;
+            </pre>
+            <p>
+                <strong>Elemente:</strong>
+                <ul>
+                    <li><code>meta name="description"</code>: Beschreibung der Seite für Suchergebnisse.</li>
+                    <li><code>meta property="og:title"</code>: Titel für soziale Medien.</li>
+                    <li><code>meta property="og:description"</code>: Beschreibung für soziale Medien.</li>
+                    <li><code>meta property="og:image"</code>: Bild für soziale Medien.</li>
+                    <li><code>meta property="og:url"</code>: URL der Seite für soziale Medien.</li>
+                    <li><code>structured data</code>: JSON-LD oder Microdata zur detaillierten Beschreibung von Inhalten.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Best Practices -->
+        <section id="best-practices">
+            <h2 class="section-header">Best Practices</h2>
+            <ul>
+                <li>Verwenden Sie semantische HTML-Tags, um die Bedeutung des Inhalts zu vermitteln.</li>
+                <li>Halten Sie den Code sauber und gut strukturiert.</li>
+                <li>Verwenden Sie beschreibende <code>alt</code>-Attribute für Bilder.</li>
+                <li>Stellen Sie sicher, dass Ihre Webseite für verschiedene Geräte und Bildschirmgrößen optimiert ist.</li>
+                <li>Validieren Sie Ihren HTML-Code, um Fehler zu vermeiden.</li>
+                <li>Verwenden Sie konsistente Einrückungen und Formatierungen.</li>
+                <li>Minimieren Sie die Verwendung von Inline-Stilen zugunsten von externen CSS-Dateien.</li>
+                <li>Optimieren Sie Bilder und Medien für schnelle Ladezeiten.</li>
+                <li>Testen Sie Ihre Webseite in verschiedenen Browsern und auf verschiedenen Geräten.</li>
+                <li>Nutzen Sie moderne Technologien und bleiben Sie über aktuelle HTML-Standards informiert.</li>
+            </ul>
+        </section>
+
+        <!-- Ressourcen -->
+        <section id="ressourcen">
+            <h2 class="section-header">Ressourcen</h2>
+            <p>
+                Hier sind einige hilfreiche Ressourcen, um mehr über HTML zu lernen:
+            </p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/de/docs/Web/HTML" target="_blank">MDN Web Docs - HTML</a></li>
+                <li><a href="https://www.w3schools.com/html/" target="_blank">W3Schools - HTML Tutorial</a></li>
+                <li><a href="https://html.com/" target="_blank">HTML.com</a></li>
+                <li><a href="https://www.freecodecamp.org/learn/responsive-web-design/#basic-html-and-html5" target="_blank">freeCodeCamp - Basic HTML and HTML5</a></li>
+                <li><a href="https://www.codecademy.com/learn/learn-html" target="_blank">Codecademy - Learn HTML</a></li>
+                <li><a href="https://www.udemy.com/topic/html/" target="_blank">Udemy - HTML-Kurse</a></li>
+                <li><a href="https://www.smashingmagazine.com/category/html" target="_blank">Smashing Magazine - HTML Artikel</a></li>
+                <li><a href="https://www.youtube.com/results?search_query=html+tutorial" target="_blank">YouTube - HTML Tutorials</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer Banner -->
+    <div class="footer-banner">
+        <a href="./impress.html">Impressum</a>
+    </div>
+
+    <!-- Lokales Bootstrap JS und jQuery -->
+    <script src="./static/js/jquery-3.6.0.min.js"></script>
+    <script src="./static/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript für das Hamburger-Menü und die Suche -->
+    <script>
+        // Hamburger-Menü Funktionalität
+        const toggler = document.querySelector('.navbar-toggler');
+        const navLinks = document.querySelector('.navbar-collapse');
+
+        toggler.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // Suchfunktionalität mit jQuery
+        $('#search-input').on('keyup', function() {
+            const searchText = $(this).val().toLowerCase();
+            $('section').each(function() {
+                const sectionTitle = $(this).find('.section-header').text().toLowerCase();
+                const sectionContent = $(this).text().toLowerCase();
+                if (sectionTitle.includes(searchText) || sectionContent.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
