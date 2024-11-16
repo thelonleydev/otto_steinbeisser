@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über mich - Otto Steinbeisser</title>
+    <!-- Local Bootstrap CSS -->
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Include jQuery -->
+    <script src="./static/js/jquery-3.6.0.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Dancing Script';
+            src: url('./static/font/DancingScript-VariableFont_wght.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #0d1117;
+            color: white;
+            font-family: 'Dancing Script', cursive;
+        }
+        .navbar-custom {
+            background-color: #0d1117;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .navbar-brand {
+            color: #ffffff !important;
+            font-size: 1.8rem;
+        }
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #58a6ff !important;
+        }
+        .about-container {
+            flex: 1;
+            padding: 1rem;
+            background-color: #0d1117;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid #58a6ff;
+        }
+        .about-content {
+            width: 100%;
+        }
+        .about-content h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .skill-box {
+            background-color: #1f6feb;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: transform 0.3s, background-color 0.3s;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .skill-box:hover {
+            transform: scale(1.05);
+            background-color: #58a6ff;
+        }
+        .footer-banner {
+            background-color: #58a6ff;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-banner a {
+            color: #ffffff;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        .footer-banner a:hover {
+            color: #1f6feb;
+        }
+
+        @media (min-width: 768px) {
+            .about-container {
+                flex-direction: row;
+                text-align: left;
+            }
+            .profile-img {
+                margin-right: 2rem;
+                margin-bottom: 0;
+            }
+            .about-content {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Otto Steinbeisser</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./aboutme.html">Über mich</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-custom nav-link px-3 py-2" href="./projects.html">Projekte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about-container">
+        <img src="./static/img/pp.jpg" alt="Profilbild" class="profile-img">
+        <div class="about-content">
+            <h1>Über mich</h1>
+            <p>
+                Hallo! Mein Name ist Otto Steinbeisser. Ich bin ein leidenschaftlicher Webentwickler mit einem starken Hintergrund in HTML, CSS und JavaScript.
+                Ich liebe es, an spannenden Projekten zu arbeiten und innovative Lösungen zu entwickeln.
+            </p>
+            <h2>Meine Fähigkeiten</h2>
+            <div class="skills-container">
+                <div class="skill-box">HTML & CSS</div>
+                <div class="skill-box">JavaScript</div>
+                <div class="skill-box">React</div>
+                <div class="skill-box">Node.js</div>
+                <div class="skill-box">Python</div>
+            </div>
+            <h2>Erfahrung</h2>
+            <p>
+                Ich habe mehrere Jahre Erfahrung in der Webentwicklung und habe an verschiedenen Projekten gearbeitet,
+                von kleinen Webseiten bis hin zu großen Webanwendungen.
+                Meine Leidenschaft für Technologie treibt mich an, ständig neue Fähigkeiten zu erlernen und mich weiterzuentwickeln.
+            </p>
+            <h2>Kontakt</h2>
+            <p>
+                Sie können mich über <a href="mailto:steinbeisserotto2006@gmail.com">steinbeisserotto2006@gmail.com</a> erreichen.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-banner">
+        <a href="./impress.html">Impressum</a>
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="./static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
